@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WellTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="USERNAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="512" />
+          <Property Name="FUNCTION" Type="varchar" MaxLength="50" />
+          <Property Name="ROLE" Type="varchar" MaxLength="50" />
+          <Property Name="CREATEDDATE" Type="datetime" />
+          <Property Name="CREATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Well">
+          <Key>
+            <PropertyRef Name="WELLID" />
+          </Key>
+          <Property Name="WELLID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LATTITUDE" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="LONGITUDE" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="512" />
+          <Property Name="CREATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="CREATEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDDATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WellTest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="WELLID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATE" Type="datetime" />
+          <Property Name="TIMESTART" Type="datetime" />
+          <Property Name="TIMESTOP" Type="datetime" />
+          <Property Name="BEAN" Type="float" />
+          <Property Name="CREATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="CREATEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="varchar" MaxLength="50" />
+          <Property Name="UPDATEDDATE" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_WELLTEST_RELATIONS_WELL">
+          <End Role="Well" Type="Self.Well" Multiplicity="1" />
+          <End Role="WellTest" Type="Self.WellTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Well">
+              <PropertyRef Name="WELLID" />
+            </Principal>
+            <Dependent Role="WellTest">
+              <PropertyRef Name="WELLID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WellTestModelStoreContainer">
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Well" EntityType="Self.Well" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WellTest" EntityType="Self.WellTest" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_WELLTEST_RELATIONS_WELL" Association="Self.FK_WELLTEST_RELATIONS_WELL">
+            <End Role="Well" EntitySet="Well" />
+            <End Role="WellTest" EntitySet="WellTest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WellTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="USERNAME" />
+          </Key>
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="FUNCTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ROLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="CREATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Well">
+          <Key>
+            <PropertyRef Name="WELLID" />
+          </Key>
+          <Property Name="WELLID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LATTITUDE" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="LONGITUDE" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="ADDRESS" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="WellTest" Relationship="Self.FK_WELLTEST_RELATIONS_WELL" FromRole="Well" ToRole="WellTest" />
+        </EntityType>
+        <EntityType Name="WellTest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="WELLID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE" Type="DateTime" Precision="3" />
+          <Property Name="TIMESTART" Type="DateTime" Precision="3" />
+          <Property Name="TIMESTOP" Type="DateTime" Precision="3" />
+          <Property Name="BEAN" Type="Double" />
+          <Property Name="CREATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Well" Relationship="Self.FK_WELLTEST_RELATIONS_WELL" FromRole="WellTest" ToRole="Well" />
+        </EntityType>
+        <Association Name="FK_WELLTEST_RELATIONS_WELL">
+          <End Role="Well" Type="Self.Well" Multiplicity="1" />
+          <End Role="WellTest" Type="Self.WellTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Well">
+              <PropertyRef Name="WELLID" />
+            </Principal>
+            <Dependent Role="WellTest">
+              <PropertyRef Name="WELLID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WellTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Well" EntityType="Self.Well" />
+          <EntitySet Name="WellTest" EntityType="Self.WellTest" />
+          <AssociationSet Name="FK_WELLTEST_RELATIONS_WELL" Association="Self.FK_WELLTEST_RELATIONS_WELL">
+            <End Role="Well" EntitySet="Well" />
+            <End Role="WellTest" EntitySet="WellTest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WellTestModelStoreContainer" CdmEntityContainer="WellTestEntities">
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="WellTestModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="FUNCTION" ColumnName="FUNCTION" />
+                <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+                <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+                <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+                <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Well">
+            <EntityTypeMapping TypeName="WellTestModel.Well">
+              <MappingFragment StoreEntitySet="Well">
+                <ScalarProperty Name="WELLID" ColumnName="WELLID" />
+                <ScalarProperty Name="LATTITUDE" ColumnName="LATTITUDE" />
+                <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+                <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WellTest">
+            <EntityTypeMapping TypeName="WellTestModel.WellTest">
+              <MappingFragment StoreEntitySet="WellTest">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WELLID" ColumnName="WELLID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="TIMESTART" ColumnName="TIMESTART" />
+                <ScalarProperty Name="TIMESTOP" ColumnName="TIMESTOP" />
+                <ScalarProperty Name="BEAN" ColumnName="BEAN" />
+                <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+                <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

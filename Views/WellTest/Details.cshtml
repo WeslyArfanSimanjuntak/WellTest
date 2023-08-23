@@ -1,0 +1,90 @@
+﻿@model WellTest.Models.WellTest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WellTest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIMESTART)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIMESTART)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIMESTOP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIMESTOP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BEAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BEAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATEDBY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CREATEDBY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATEDDATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CREATEDDATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UPDATEDBY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UPDATEDBY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UPDATEDDATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UPDATEDDATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Well.ADDRESS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Well.ADDRESS)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
